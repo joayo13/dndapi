@@ -12,7 +12,7 @@ exports.comment_create_comment = [
       if(!errors.isEmpty()) {
         res.json({errors: errors.array()})
       }
-      jwt.verify(req.token, 'secretkey', (err, authData) => {
+      jwt.verify(req.token, process.env.SECRET_KEY, (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -40,7 +40,7 @@ exports.comment_update_comment = [
       if(!errors.isEmpty()) {
         res.json({errors: errors.array()})
       }
-      jwt.verify(req.token, 'secretkey', async (err, authData) => {
+      jwt.verify(req.token, process.env.SECRET_KEY, async (err, authData) => {
         if(err) {
           res.sendStatus(403);
         } else {
@@ -59,7 +59,7 @@ exports.comment_update_comment = [
     })
 ]
 exports.comment_delete_comment = asyncHandler(async (req, res, next) => {
-    jwt.verify(req.token, 'secretkey', async (err, authData) => { 
+    jwt.verify(req.token, process.env.SECRET_KEY, async (err, authData) => { 
       if(err) {
         res.sendStatus(403);
       } else {

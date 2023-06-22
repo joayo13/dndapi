@@ -12,7 +12,7 @@ exports.post_create_post = [
     if(!errors.isEmpty()) {
       res.json({errors: errors.array()})
     }
-    jwt.verify(req.token, 'secretkey', (err, authData) => {
+    jwt.verify(req.token, process.env.SECRET_KEY, (err, authData) => {
       if(err) {
         res.sendStatus(403);
       } else {
@@ -41,7 +41,7 @@ exports.post_get_post = asyncHandler(async (req, res, next) => {
   res.json(post)
 })
 exports.post_delete_post = asyncHandler(async (req, res, next) => {
-  jwt.verify(req.token, 'secretkey', async (err, authData) => { 
+  jwt.verify(req.token, process.env.SECRET_KEY, async (err, authData) => { 
     if(err) {
       res.sendStatus(403);
     } else {
@@ -59,7 +59,7 @@ exports.post_update_post = [
     if(!errors.isEmpty()) {
       res.json({errors: errors.array()})
     }
-    jwt.verify(req.token, 'secretkey', async (err, authData) => {
+    jwt.verify(req.token, process.env.SECRET_KEY, async (err, authData) => {
       if(err) {
         res.sendStatus(403);
       } else {

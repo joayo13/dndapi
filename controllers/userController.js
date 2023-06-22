@@ -46,7 +46,7 @@ exports.user_login_post = asyncHandler(async (req, res, next) => {
     const user = await User.findOne({ email: req.body.email });
         bcrypt.compare(req.body.password, user.password, (err, result) => {
             if(result) {
-                jwt.sign({user}, 'secretkey', { expiresIn: '12h' }, (err, token) => {
+                jwt.sign({user}, process.env.SECRET_KEY, { expiresIn: '12h' }, (err, token) => {
                     res.json({token})
                 })
             } else {
